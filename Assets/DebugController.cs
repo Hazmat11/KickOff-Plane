@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,10 +15,23 @@ public class DebugController : MonoBehaviour
     public float mouseXSensitivity;
     public float mouseYSensitivity;
 
+    public Transform refCam;
+
     public Rigidbody rb;
-    
-    
-    
+
+    public static DebugController instance;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            DestroyImmediate(this);
+        }
+
+        instance = this;
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,19 +53,19 @@ public class DebugController : MonoBehaviour
         input = Vector3.zero;
         if (Input.GetKey(KeyCode.W))
         {
-            input = new Vector3(input.x, 0, input.z + forwardSpeed);
+            input += transform.forward * forwardSpeed;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            input = new Vector3(input.x, 0, input.z - forwardSpeed);
+            input += -transform.forward * forwardSpeed;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            input = new Vector3(input.x - sidewaysSpeed, 0, input.z);
+            input += -transform.right * sidewaysSpeed;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            input = new Vector3(input.x + sidewaysSpeed, 0, input.z);
+            input += transform.right * sidewaysSpeed;
         }
 
 
