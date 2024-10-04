@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,15 @@ public class Arrow : MonoBehaviour
 {
 
     public GameObject target;
-    // Start is called before the first frame update
+
+    private Vector3 basePos;
+
+    public float bounceAmplitude;
+
+    private void Awake()
+    {
+        basePos = transform.position;
+    }
 
     // Update is called once per frame
     void Update()
@@ -26,7 +35,8 @@ public class Arrow : MonoBehaviour
                 target = go;
             }
         }
-        
+
+        transform.position = Vector3.Lerp(basePos, basePos + transform.forward * bounceAmplitude, Mathf.Sin(Time.time));
         transform.LookAt(target.transform);
     }
 }
