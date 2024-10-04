@@ -40,5 +40,6 @@ public class CameraControl : MonoBehaviour
             _newXRotation = Mathf.Clamp(transform.eulerAngles.x, 0, 40);
         }
         transform.rotation = Quaternion.Euler(_newXRotation, transform.eulerAngles.y, transform.eulerAngles.z);
+
     }
 }

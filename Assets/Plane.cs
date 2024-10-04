@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class Plane : MonoBehaviour
 {
-
     [SerializeField] private GameObject lookAtObject;
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject parent;
@@ -30,7 +29,6 @@ public class Plane : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        wings.transform.Rotate(0, 360 * Time.deltaTime, 0);
         for (int i = 0; i < gunPoints.Length; i++)
         {
             gunPoints[i].transform.LookAt(lookAtObject.transform);
@@ -48,8 +46,10 @@ public class Plane : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
+            wings.transform.Rotate(0, 360 * Time.deltaTime, 0);
             _rigidbody.AddForce(Vector3.up * 5, ForceMode.Force);
         }
+
         if (Input.GetMouseButton(0))
         {
             if (_cooldown <= 0)
@@ -62,6 +62,7 @@ public class Plane : MonoBehaviour
             }
             else { _cooldown -= Time.deltaTime; }
         }
+
         InputFunction();
     }
 

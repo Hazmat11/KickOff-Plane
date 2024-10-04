@@ -3,6 +3,7 @@ using UnityEngine;
 public class DCABehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject cannon;
 
     private bool _playerDetected = false;
     private GameObject _target;
@@ -18,11 +19,11 @@ public class DCABehaviour : MonoBehaviour
     {
         if (_playerDetected)
         {
-            transform.LookAt(_target.transform.position);
+            cannon.transform.LookAt(_target.transform.position);
             _time -= Time.deltaTime;
             if (_time <= 0)
             {
-                GameObject bullet = Instantiate(bulletPrefab, transform.position + 2 * transform.forward, transform.rotation);
+                GameObject bullet = Instantiate(bulletPrefab, transform.position + 2 * transform.up, Quaternion.Euler(0,90,0));
                 bullet.GetComponent<DCABullet>().Target = _target;
                 _time = 2;
             }
