@@ -6,7 +6,6 @@ public class DCABullet : MonoBehaviour
 {
     private float _startTime;
     private float _speed = 60.0f;
-    private bool _stopSin = false;
     private Vector3 _heading;
 
     public GameObject Target;

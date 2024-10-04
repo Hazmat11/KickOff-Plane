@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -54,18 +55,21 @@ public class Plane : MonoBehaviour
             if (_cooldown <= 0)
             {
                 _rightOrLeft = _leftOrRight == true ? 0 : 1;
+                gunPoints[_rightOrLeft].transform.Rotate(0, 0, 360 * Time.deltaTime);
                 Instantiate(bullet, gunPoints[_rightOrLeft].transform.position + transform.forward, gunPoints[_rightOrLeft].transform.rotation);
                 _leftOrRight = !_leftOrRight;
                 _cooldown = 0.1f;
             }
             else { _cooldown -= Time.deltaTime; }
         }
+        InputFunction();
+    }
+
+    private void InputFunction()
+    {
         if (Input.GetKey(KeyCode.W))
         {
             transform.position += Time.deltaTime * _speed * transform.forward;
-            transform.Rotate(90* Time.deltaTime,0,0);
-
-            //Create a function that you call after the camera scripts
         }
         if (Input.GetKey(KeyCode.A))
         {
@@ -80,7 +84,6 @@ public class Plane : MonoBehaviour
             transform.position += Time.deltaTime * _speed * transform.right;
         }
     }
-
 
     private void FixedUpdate()
     {
