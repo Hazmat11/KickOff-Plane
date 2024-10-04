@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     public CanvasGroup mainMenu;
     public CanvasGroup pauseMenu;
+    public CanvasGroup victoryScreen;
+    public CanvasGroup defeatScreen;
 
     public TextMeshProUGUI counter;
 
@@ -66,6 +68,14 @@ public class GameManager : MonoBehaviour
         Destroy(go);
         
         counter.text = allEnemies - enemies.Count + " / " + allEnemies;
+
+        if (enemies.Count == 0)
+        {
+            victoryScreen.alpha = 1;
+            victoryScreen.interactable = true;
+            victoryScreen.blocksRaycasts = true;
+            Time.timeScale = 0;
+        }
     }
 
     public void StartGame()
@@ -73,6 +83,14 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartGameCoroutine());
     }
 
+
+    public void Lose()
+    {
+        defeatScreen.alpha = 1;
+        defeatScreen.interactable = true;
+        defeatScreen.blocksRaycasts = true;
+        Time.timeScale = 0;
+    }
     public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

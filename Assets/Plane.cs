@@ -143,7 +143,7 @@ public class Plane : MonoBehaviour
         fill.value -= 0.2f;
         if (fill.value <= 0)
         {
-            Destroy(gameObject);
+            GameManager.instance.Lose();
         }
     }
 }
