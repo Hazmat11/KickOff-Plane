@@ -30,6 +30,7 @@ public class DCABullet : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Plane.instance.TakeDamage();
+            Instantiate(Plane.instance.explosion, collision.GetContact(0).point, transform.rotation);
         }
         Destroy(gameObject);
     }

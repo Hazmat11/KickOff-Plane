@@ -21,6 +21,7 @@ public class TurretBullet : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Plane.instance.TakeDamage();
+            Instantiate(Plane.instance.explosion, other.GetContact(0).point, transform.rotation);
         }
         Destroy(gameObject);
     }

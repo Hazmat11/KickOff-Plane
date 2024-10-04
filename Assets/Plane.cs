@@ -12,7 +12,7 @@ public class Plane : MonoBehaviour
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject parent;
     [SerializeField] private GameObject wings;
-    [SerializeField] private GameObject explosion;
+    public GameObject explosion;
     [SerializeField] private GameObject[] gunPoints;
     [SerializeField] private Slider fill;
 
