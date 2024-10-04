@@ -91,7 +91,7 @@ public class Plane : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float newYVelocity = Mathf.Clamp(_rigidbody.velocity.y, -2, 2);
+        float newYVelocity = Mathf.Clamp(_rigidbody.velocity.y, -5, 2);
         float newYPosition = Mathf.Clamp(transform.position.y, -5, 9);
         _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, newYVelocity, _rigidbody.velocity.z);
         transform.position = new Vector3(transform.position.x, newYPosition, transform.position.z);

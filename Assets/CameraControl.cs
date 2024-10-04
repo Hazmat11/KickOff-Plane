@@ -31,6 +31,7 @@ public class CameraControl : MonoBehaviour
         Quaternion yQuat = Quaternion.AngleAxis(rotation.y, Vector3.left);
 
         transform.rotation = xQuat * yQuat;
+
         if (transform.eulerAngles.x >= 180)
         {
             _newXRotation = Mathf.Clamp(transform.eulerAngles.x, 350, 360);
@@ -39,7 +40,7 @@ public class CameraControl : MonoBehaviour
         {
             _newXRotation = Mathf.Clamp(transform.eulerAngles.x, 0, 40);
         }
-        transform.rotation = Quaternion.Euler(_newXRotation, transform.eulerAngles.y, transform.eulerAngles.z);
 
+        transform.rotation = Quaternion.Euler(_newXRotation, transform.eulerAngles.y, transform.eulerAngles.z);
     }
 }
