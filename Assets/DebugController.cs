@@ -21,6 +21,8 @@ public class DebugController : MonoBehaviour
 
     public static DebugController instance;
 
+    public bool paused;
+
     private void Awake()
     {
         if (instance != null)
@@ -36,8 +38,8 @@ public class DebugController : MonoBehaviour
     void Start()
     {
         playerCam = Camera.main;
-        Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
+        paused = true;
     }
 
     // Update is called once per frame
@@ -45,6 +47,8 @@ public class DebugController : MonoBehaviour
     private Vector3 input;
     void Update()
     {
+        if (paused) return;
+        
         transform.rotation *= Quaternion.Euler(0,
             mouseXSensitivity * Input.GetAxis("Mouse X")
             ,0);
