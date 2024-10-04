@@ -10836,6 +10836,7 @@ MonoBehaviour:
   bullet: {fileID: 9167484084030946609, guid: 2ed28079a129b1649a8f30768c4e850a, type: 3}
   parent: {fileID: 500588819}
   wings: {fileID: 926714254}
+  explosion: {fileID: 1530042648182659808, guid: bb756c6d1a963e544a4c90b0ac98429d, type: 3}
   gunPoints:
   - {fileID: 404949150}
   - {fileID: 1042654366}
@@ -13429,6 +13430,7 @@ MonoBehaviour:
   mainMenu: {fileID: 1413628516}
   pauseMenu: {fileID: 227469345}
   counter: {fileID: 624785288}
+  explosionPrefab: {fileID: 2143363202636907512, guid: 634c3bbb72c859544a2345e8405b2f98, type: 3}
 --- !u!4 &1182443070
 Transform:
   m_ObjectHideFlags: 0
@@ -17911,7 +17913,7 @@ CanvasGroup:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1413628514}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1

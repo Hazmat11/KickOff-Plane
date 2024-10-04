@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI counter;
 
+    public GameObject explosionPrefab;
+
 
     // Start is called before the first frame update
 
@@ -58,6 +60,9 @@ public class GameManager : MonoBehaviour
     public void RemoveEnemy(GameObject go)
     {
         enemies.Remove(go);
+        var temp = Instantiate(explosionPrefab, go.transform.position, Quaternion.identity);
+        temp.transform.localScale = go.transform.localScale * 0.25f;
+        Destroy(temp, 3f);
         Destroy(go);
         
         counter.text = allEnemies - enemies.Count + " / " + allEnemies;

@@ -6,7 +6,6 @@ public class BulletBehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject impact;
 
-    private float _speed = 100.0f;
     public float _speed = 20.0f;
     private Rigidbody rb;
 
@@ -36,6 +35,9 @@ public class BulletBehaviour : MonoBehaviour
             GameManager.instance.RemoveEnemy(turret.gameObject);
         }
         
+        var temp = Instantiate(impact, other.GetContact(0).point, transform.rotation);
+        
+        Destroy(temp, 1);
         
         Destroy(gameObject);
     }
@@ -46,8 +48,4 @@ public class BulletBehaviour : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Instantiate(impact, collision.GetContact(0).point, transform.rotation);
-    }
 }
