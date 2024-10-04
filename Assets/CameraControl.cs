@@ -31,18 +31,12 @@ public class CameraControl : MonoBehaviour
         
         rotation.x += Input.GetAxis(xAxis) * sensitivity;
         rotation.y += Input.GetAxis(yAxis) * sensitivity;
+
+        rotation.y = Mathf.Clamp(rotation.y, -40, 10);
+
         Quaternion xQuat = Quaternion.AngleAxis(rotation.x, Vector3.up);
         Quaternion yQuat = Quaternion.AngleAxis(rotation.y, Vector3.left);
 
         transform.rotation = xQuat * yQuat;
-        if (transform.eulerAngles.x >= 180)
-        {
-            _newXRotation = Mathf.Clamp(transform.eulerAngles.x, 350, 360);
-        }
-        else if (transform.eulerAngles.x <= 180)
-        {
-            _newXRotation = Mathf.Clamp(transform.eulerAngles.x, 0, 40);
-        }
-        transform.rotation = Quaternion.Euler(_newXRotation, transform.eulerAngles.y, transform.eulerAngles.z);
     }
 }

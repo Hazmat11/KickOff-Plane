@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ public class Plane : MonoBehaviour
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject parent;
     [SerializeField] private GameObject wings;
+    [SerializeField] private GameObject explosion;
     [SerializeField] private GameObject[] gunPoints;
     [SerializeField] private Slider fill;
 
@@ -75,6 +77,7 @@ public class Plane : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
+            wings.transform.Rotate(0, 1000 * Time.deltaTime, 0);
             _rigidbody.AddForce(Vector3.up * 5, ForceMode.Force);
         }
 

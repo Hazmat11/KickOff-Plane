@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
+    [SerializeField] private GameObject impact;
+
+    private float _speed = 100.0f;
     public float _speed = 20.0f;
     private Rigidbody rb;
 
@@ -41,5 +44,10 @@ public class BulletBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(0.7f);
         Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Instantiate(impact, collision.GetContact(0).point, transform.rotation);
     }
 }

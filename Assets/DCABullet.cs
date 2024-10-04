@@ -4,23 +4,19 @@ using static UnityEngine.GraphicsBuffer;
 
 public class DCABullet : MonoBehaviour
 {
-    private float _startTime;
-    private float _speed = 60.0f;
     private Vector3 _heading;
 
     public GameObject Target;
 
     void Start()
     {
-        _startTime = Time.time;
         _heading = Target.transform.position - transform.position;
-        GetComponent<Rigidbody>().AddForce(Vector3.up * 5, ForceMode.Impulse);
+        GetComponent<Rigidbody>().AddForce(Vector3.up * 5 + _heading, ForceMode.Impulse);
         StartCoroutine(ToDestroy());
     }
 
     void FixedUpdate()
     {
-        transform.position += Time.deltaTime * _speed * _heading.normalized;
     }
 
     IEnumerator ToDestroy()
