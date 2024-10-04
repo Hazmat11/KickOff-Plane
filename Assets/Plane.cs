@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ public class Plane : MonoBehaviour
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject parent;
     [SerializeField] private GameObject wings;
+    [SerializeField] private GameObject explosion;
     [SerializeField] private GameObject[] gunPoints;
     [SerializeField] private Slider fill;
 
@@ -29,6 +31,7 @@ public class Plane : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        wings.transform.Rotate(0, 360 * Time.deltaTime, 0);
         for (int i = 0; i < gunPoints.Length; i++)
         {
             gunPoints[i].transform.LookAt(lookAtObject.transform);
@@ -46,7 +49,7 @@ public class Plane : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
-            wings.transform.Rotate(0, 360 * Time.deltaTime, 0);
+            wings.transform.Rotate(0, 1000 * Time.deltaTime, 0);
             _rigidbody.AddForce(Vector3.up * 5, ForceMode.Force);
         }
 
@@ -98,6 +101,7 @@ public class Plane : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet")
         {
+            Instantiate(explosion, collision.GetContact(0).point, transform.rotation, transform);
             fill.value -= 0.2f;
             if (fill.value <= 0)
             { Destroy(gameObject); }

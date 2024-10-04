@@ -6,6 +6,7 @@ public class DCABehaviour : MonoBehaviour
     [SerializeField] private GameObject cannon;
 
     private bool _playerDetected = false;
+    private bool _doItOnce = false;
     private GameObject _target;
     private float _time = 2;
 
@@ -51,9 +52,12 @@ public class DCABehaviour : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag ==  "Bullet")
+        if(collision.gameObject.tag ==  "PlayerBullet" && !_doItOnce)
         {
-            Destroy(gameObject);
+            _doItOnce = true;
+            var exp = GetComponent<ParticleSystem>();
+            exp.Play();
+            Destroy(gameObject, exp.main.duration / 2);
         }
     }
 }

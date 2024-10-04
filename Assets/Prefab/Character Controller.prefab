@@ -305,6 +305,7 @@ MonoBehaviour:
   bullet: {fileID: 9167484084030946609, guid: 2ed28079a129b1649a8f30768c4e850a, type: 3}
   parent: {fileID: 8701866159760589689}
   wings: {fileID: 6101423965869646047}
+  explosion: {fileID: 2143363202636907512, guid: 634c3bbb72c859544a2345e8405b2f98, type: 3}
   gunPoints:
   - {fileID: 8704859253461483069}
   - {fileID: 8256249522622536924}
@@ -727,7 +728,7 @@ GameObject:
   - component: {fileID: 958159567637790759}
   - component: {fileID: 7698266998985522548}
   m_Layer: 2
-  m_Name: Sphere (2)
+  m_Name: Spin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1182,7 +1183,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 0852e350e94dac742b8e798a47f486a1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1240,7 +1241,7 @@ GameObject:
   - component: {fileID: 445601460441586891}
   - component: {fileID: 3019416914511015904}
   m_Layer: 2
-  m_Name: Sphere (3)
+  m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1377,7 +1378,7 @@ GameObject:
   - component: {fileID: 3649809483762561068}
   - component: {fileID: 3203404720511573583}
   m_Layer: 2
-  m_Name: Sphere
+  m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
