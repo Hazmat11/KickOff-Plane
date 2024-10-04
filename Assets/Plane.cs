@@ -21,7 +21,7 @@ public class Plane : MonoBehaviour
     public Transform refCam;
     public bool paused;
 
-    private LineRenderer line;
+    private LineRenderer[] line;
     //
 
     [HideInInspector] public Rigidbody _rigidbody;
@@ -48,8 +48,12 @@ public class Plane : MonoBehaviour
 
     void Start()
     {
+        line = new LineRenderer[2];
         _rigidbody = GetComponent<Rigidbody>();
-        line = GetComponent<LineRenderer>();
+        for (int i = 0; i < gunPoints.Length; i++)
+        {
+            line[i] = gunPoints[i].GetComponent<LineRenderer>();
+        }
     }
 
     // Update is called once per frame
@@ -98,8 +102,11 @@ public class Plane : MonoBehaviour
             }
         }
 
-        line.SetPosition(0,transform.position);
-        line.SetPosition(1,lookAtObject.transform.position);
+        for (int i = 0; i < gunPoints.Length; i++)
+        {
+            line[i].SetPosition(0, gunPoints[i].transform.position);
+            line[i].SetPosition(1, lookAtObject.transform.position);
+        }
         InputFunction();
     }
 
