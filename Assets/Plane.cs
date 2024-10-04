@@ -16,6 +16,7 @@ public class Plane : MonoBehaviour
     [SerializeField] private GameObject[] gunPoints;
     [SerializeField] private Slider fill;
 
+    private LineRenderer[] _lineRenderer;
     private Rigidbody _rigidbody;
     private float _speed = 20.0f;
     private float _cooldown = 0.1f;
@@ -26,6 +27,13 @@ public class Plane : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+
+        _lineRenderer = new LineRenderer[2];
+
+        for (int i = 0; gunPoints.Length > i; i++)
+        {
+            _lineRenderer[i] = gunPoints[i].GetComponent<LineRenderer>();
+        }
     }
 
     // Update is called once per frame
@@ -66,6 +74,12 @@ public class Plane : MonoBehaviour
             else { _cooldown -= Time.deltaTime; }
         }
 
+        for (int i = 0; gunPoints.Length > i; i++)
+        {
+            _lineRenderer[i].SetPosition(0, gunPoints[i].transform.position + gunPoints[i].transform.forward);
+            _lineRenderer[i].SetPosition(1, lookAtObject.transform.position);
+        }
+
         InputFunction();
     }
 
@@ -95,6 +109,7 @@ public class Plane : MonoBehaviour
         float newYPosition = Mathf.Clamp(transform.position.y, -5, 9);
         _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, newYVelocity, _rigidbody.velocity.z);
         transform.position = new Vector3(transform.position.x, newYPosition, transform.position.z);
+
     }
 
     private void OnCollisionEnter(Collision collision)

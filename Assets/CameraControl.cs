@@ -33,6 +33,7 @@ public class CameraControl : MonoBehaviour
         Quaternion xQuat = Quaternion.AngleAxis(rotation.x, Vector3.up);
         Quaternion yQuat = Quaternion.AngleAxis(rotation.y, Vector3.left);
 
-        transform.rotation = xQuat * yQuat;
-    }
+        Quaternion goal = xQuat * yQuat;
+        transform.rotation = Quaternion.Slerp(transform.rotation, goal, sensitivity * Time.deltaTime);
+    }   
 }
