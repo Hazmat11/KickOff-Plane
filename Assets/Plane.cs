@@ -7,29 +7,56 @@ using UnityEngine.UI;
 
 public class Plane : MonoBehaviour
 {
-
-    [SerializeField] private GameObject lookAtObject;
+    public GameObject lookAtObject;
     [SerializeField] private GameObject bullet;
     [SerializeField] private GameObject parent;
     [SerializeField] private GameObject wings;
     [SerializeField] private GameObject[] gunPoints;
     [SerializeField] private Slider fill;
 
-    private Rigidbody _rigidbody;
+    //Oscar
+    public static Plane instance;
+    public Transform refCam;
+    public bool paused;
+
+    private LineRenderer line;
+    //
+
+    [HideInInspector] public Rigidbody _rigidbody;
+
+    public float maxYSpeed = 9;
     private float _speed = 20.0f;
     private float _cooldown = 0.1f;
     private bool _leftOrRight;
     private int _rightOrLeft;
 
-    // Start is called before the first frame update
+
+    //Oscar
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            DestroyImmediate(gameObject);
+        }
+
+        instance = this;
+    }
+    //
+
+
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        line = GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (paused)
+            return;
+
+
         wings.transform.Rotate(0, 360 * Time.deltaTime, 0);
         for (int i = 0; i < gunPoints.Length; i++)
         {
@@ -50,18 +77,26 @@ public class Plane : MonoBehaviour
         {
             _rigidbody.AddForce(Vector3.up * 5, ForceMode.Force);
         }
+
         if (Input.GetMouseButton(0))
         {
             if (_cooldown <= 0)
             {
                 _rightOrLeft = _leftOrRight == true ? 0 : 1;
                 gunPoints[_rightOrLeft].transform.Rotate(0, 0, 360 * Time.deltaTime);
-                Instantiate(bullet, gunPoints[_rightOrLeft].transform.position + transform.forward, gunPoints[_rightOrLeft].transform.rotation);
+                Instantiate(bullet, gunPoints[_rightOrLeft].transform.position + transform.forward,
+                    gunPoints[_rightOrLeft].transform.rotation);
                 _leftOrRight = !_leftOrRight;
                 _cooldown = 0.1f;
             }
-            else { _cooldown -= Time.deltaTime; }
+            else
+            {
+                _cooldown -= Time.deltaTime;
+            }
         }
+
+        line.SetPosition(0,transform.position);
+        line.SetPosition(1,lookAtObject.transform.position);
         InputFunction();
     }
 
@@ -71,14 +106,17 @@ public class Plane : MonoBehaviour
         {
             transform.position += Time.deltaTime * _speed * transform.forward;
         }
+
         if (Input.GetKey(KeyCode.A))
         {
             transform.position += Time.deltaTime * _speed * transform.right * -1;
         }
+
         if (Input.GetKey(KeyCode.S))
         {
             transform.position += Time.deltaTime * _speed * transform.forward * -1;
         }
+
         if (Input.GetKey(KeyCode.D))
         {
             transform.position += Time.deltaTime * _speed * transform.right;
@@ -87,19 +125,22 @@ public class Plane : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float newYVelocity = Mathf.Clamp(_rigidbody.velocity.y, -2, 2);
-        float newYPosition = Mathf.Clamp(transform.position.y, -5, 9);
-        _rigidbody.velocity = new Vector3(_rigidbody.velocity.x, newYVelocity, _rigidbody.velocity.z);
+        float newYVelocity = Mathf.Clamp(_rigidbody.velocity.y, -maxYSpeed, maxYSpeed);
+        float newYPosition = Mathf.Clamp(transform.position.y, -5, 15);
+        _rigidbody.velocity = new Vector3(0, newYVelocity, 0);
         transform.position = new Vector3(transform.position.x, newYPosition, transform.position.z);
+        
+
     }
 
-    private void OnCollisionEnter(Collision collision)
+
+
+    public void TakeDamage()
     {
-        if (collision.gameObject.tag == "Bullet")
+        fill.value -= 0.2f;
+        if (fill.value <= 0)
         {
-            fill.value -= 0.2f;
-            if (fill.value <= 0)
-            { Destroy(gameObject); }
+            Destroy(gameObject);
         }
     }
 }

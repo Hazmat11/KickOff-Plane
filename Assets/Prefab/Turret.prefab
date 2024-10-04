@@ -122,14 +122,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 0.4
-  shootSpeed: 2
-  shootSpread: 5
+  shootSpeed: 5
+  shootSpread: 15
   angleToShoot: 10
   rotationFrequency: 4
-  range: 20
+  range: 30
   bullet: {fileID: 123021214081888319, guid: 149984eb7236bde40ab2f737db9da0fa, type: 3}
   player: {fileID: 0}
-  bulletSpeed: 5
+  bulletSpeed: 20
 --- !u!1 &7396759566890615033
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +141,6 @@ GameObject:
   - component: {fileID: 2624070718820846009}
   - component: {fileID: 2750482215793052212}
   - component: {fileID: 6437584195176739301}
-  - component: {fileID: 5086051537227883617}
   m_Layer: 0
   m_Name: Capsule (1)
   m_TagString: Untagged
@@ -214,26 +213,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5086051537227883617
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7396759566890615033}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}

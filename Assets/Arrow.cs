@@ -11,10 +11,11 @@ public class Arrow : MonoBehaviour
     private Vector3 basePos;
 
     public float bounceAmplitude;
+    public float bounceFrequency = 0.05f;
 
     private void Awake()
     {
-        basePos = transform.position;
+        basePos = transform.localPosition;
     }
 
     // Update is called once per frame
@@ -29,14 +30,14 @@ public class Arrow : MonoBehaviour
                 continue;
             }
 
-            if (Vector3.Distance(target.transform.position, DebugController.instance.transform.position) >
-                Vector3.Distance(go.transform.position, DebugController.instance.transform.position))
+            if (Vector3.Distance(target.transform.position, Plane.instance.transform.position) >
+                Vector3.Distance(go.transform.position, Plane.instance.transform.position))
             {
                 target = go;
             }
         }
 
-        transform.position = Vector3.Lerp(basePos, basePos + transform.forward * bounceAmplitude, Mathf.Sin(Time.time));
         transform.LookAt(target.transform);
+        transform.localPosition = Vector3.Lerp(basePos, basePos + transform.forward * bounceAmplitude, Mathf.Sin(Time.time * bounceFrequency) *0.5f + 0.5f);
     }
 }

@@ -23,7 +23,7 @@ public class TurretBehavior : MonoBehaviour
 
     public GameObject bullet;
 
-    public DebugController player;
+    public Plane player;
 
     private bool playerInRange;
     
@@ -32,7 +32,7 @@ public class TurretBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = DebugController.instance;
+        player = Plane.instance;
         
         GameManager.instance.AddEnemy(gameObject);
     }
@@ -77,7 +77,7 @@ public class TurretBehavior : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(
             transform.rotation,
             tempQuaternion
-            ,rotationSpeed);
+            ,rotationSpeed * 0.5f);
 
         if (Mathf.Abs(Mathf.Atan2(rotationTarget.x,rotationTarget.z) * Mathf.Rad2Deg) - Mathf.Abs(Mathf.Atan2(transform.forward.x,transform.forward.z) * Mathf.Rad2Deg) 
             < angleToShoot)

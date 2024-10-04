@@ -11,12 +11,17 @@ public class TurretBullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject, 10);
+        Destroy(gameObject, lifeTime);
     }
 
     private void OnCollisionEnter(Collision other)
     {
         Debug.Log("Hit");
+
+        if (other.gameObject.tag == "Player")
+        {
+            Plane.instance.TakeDamage();
+        }
         Destroy(gameObject);
     }
 }

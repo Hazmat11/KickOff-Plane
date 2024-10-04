@@ -29,8 +29,12 @@ public class DCABullet : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
+        if (collision.gameObject.tag == "Player")
+        {
+            Plane.instance.TakeDamage();
+        }
         Destroy(gameObject);
     }
 }

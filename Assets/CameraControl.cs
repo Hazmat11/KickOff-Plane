@@ -25,6 +25,10 @@ public class CameraControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Plane.instance.paused)
+            return;
+        
+        
         rotation.x += Input.GetAxis(xAxis) * sensitivity;
         rotation.y += Input.GetAxis(yAxis) * sensitivity;
         Quaternion xQuat = Quaternion.AngleAxis(rotation.x, Vector3.up);
